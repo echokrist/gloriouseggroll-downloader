@@ -51,7 +51,7 @@ func main() {
 	GEFilePathWithLatestTagName := filepath.Join(steamCompatabilityFolderPath, tagName)
 
 	if _, err := os.Stat(GEFilePathWithLatestTagName); err == nil {
-		fmt.Printf("The latest version of GE-Proton is already installed. Exiting...\n")
+		fmt.Printf("The latest version of GE-Proton, %s, is already installed. Exiting...\n", tagName)
 		os.Exit(0)
 	}
 
