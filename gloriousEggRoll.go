@@ -38,8 +38,19 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Combine the home directory with the relative folder path
 	steamCompatabilityFolderPath = filepath.Join(homeDir, steamCompatabilityFolderPath[2:])
+
+	// Check if compatibility tools folder exists, if not create it.
+
+	if _, err := os.Stat(steamCompatabilityFolderPath); os.IsNotExist(err) {
+		if err != nil {
+			err := os.Mkdir(steamCompatabilityFolderPath, 0755)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Could not find or create: %v\n", steamCompatabilityFolderPath)
+				os.Exit(1)
+			}
+		}
+	}
 
 	// Get the latest release tag and download URL of the .tar.gz file
 	tagName, tarGzDownloadURL, err := getLatestReleaseURL(owner, repo)
